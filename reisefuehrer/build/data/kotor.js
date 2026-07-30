@@ -23,6 +23,14 @@ module.exports = {
       [{ x: 0, y: 0 }, { x: 100, y: 0 }, { x: 100, y: 55 }, { x: 0, y: 60 }],
     ],
     route: [{ x: 12, y: 58 }, { x: 20, y: 55 }, { x: 28, y: 51 }, { x: 34, y: 44 }, { x: 38, y: 32 }, { x: 40, y: 20 }],
+    streets: [
+      { main: true, name: 'Vrata od Mora', path: [{ x: 12, y: 58 }, { x: 20, y: 55 }, { x: 24, y: 54 }] },
+      { main: true, name: 'Trg od Oružja', path: [{ x: 24, y: 54 }, { x: 30, y: 51 }, { x: 37, y: 49 }] },
+      { main: false, name: 'Ul. Petra I Petrovića', path: [{ x: 37, y: 49 }, { x: 44, y: 51 }, { x: 50, y: 53 }] },
+      { main: false, name: 'Ul. Zuzorina', path: [{ x: 37, y: 49 }, { x: 50, y: 47 }, { x: 64, y: 46 }] },
+      { main: false, name: 'Aufstieg zur Festung (1.350 Stufen)', path: [{ x: 37, y: 49 }, { x: 34, y: 44 }, { x: 38, y: 32 }, { x: 40, y: 20 }] },
+      { main: false, name: 'Škurda-Ufer', path: [{ x: 20, y: 55 }, { x: 20, y: 44 }, { x: 20, y: 40 }] },
+    ],
     points: [
       { n: 1, x: 12, y: 58, cat: 'ship', label: 'Schiff (an der Mauer)' },
       { n: 2, x: 24, y: 54, cat: 'gate', label: 'Seetor' },

@@ -23,6 +23,14 @@ module.exports = {
       [{ x: 44, y: 62 }, { x: 60, y: 55 }, { x: 92, y: 60 }, { x: 96, y: 80 }, { x: 88, y: 96 }, { x: 60, y: 96 }, { x: 46, y: 84 }],
     ],
     route: [{ x: 8, y: 34 }, { x: 22, y: 40 }, { x: 34, y: 52 }, { x: 46, y: 64 }, { x: 55, y: 70 }, { x: 66, y: 74 }],
+    streets: [
+      { main: true, name: 'Ul. Ante Starčevića', path: [{ x: 8, y: 34 }, { x: 22, y: 40 }, { x: 34, y: 52 }, { x: 46, y: 64 }, { x: 55, y: 70 }] },
+      { main: true, name: 'Stradun (Placa)', path: [{ x: 55, y: 70 }, { x: 66, y: 74 }, { x: 75, y: 78 }] },
+      { main: false, name: 'Ul. Od Puča', path: [{ x: 75, y: 78 }, { x: 81, y: 80 }, { x: 86, y: 82 }] },
+      { main: false, name: 'Ul. Svetog Dominika', path: [{ x: 55, y: 70 }, { x: 60, y: 65 }, { x: 62, y: 62 }] },
+      { main: false, name: 'Ul. Zamanjina', path: [{ x: 66, y: 74 }, { x: 72, y: 70 }, { x: 78, y: 66 }] },
+      { main: false, name: 'Ul. Miha Pracata', path: [{ x: 55, y: 70 }, { x: 52, y: 76 }, { x: 50, y: 82 }] },
+    ],
     points: [
       { n: 1, x: 8, y: 34, cat: 'ship', label: 'Schiff (Gruž)' },
       { n: 2, x: 55, y: 70, cat: 'gate', label: 'Pile Gate' },

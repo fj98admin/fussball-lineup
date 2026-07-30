@@ -41,9 +41,15 @@ function card(inner, { tag = '', tagVariant = '' } = {}) {
   return `<div class="card">${tag ? `<span class="tag ${tagVariant}">${esc(tag)}</span><br/>` : ''}${inner}</div>`;
 }
 
-function dishCard(d) {
+function iconTiles(keys, renderIcon, variant = '') {
+  return `<div class="icon-tiles">${keys.map(k => `<div class="icon-tile ${variant}">${renderIcon(k)}</div>`).join('')}</div>`;
+}
+
+function dishCard(d, ICONS) {
   // d: {name, desc, price, where, tip}
+  const tiles = ICONS ? iconTiles(ICONS.pickFoodIcons(d), ICONS.renderIcon, 'coral-tile') : '';
   return card(`
+    ${tiles}
     <div class="card-title">${esc(d.name)}</div>
     <p class="small">${d.desc}</p>
     <p class="tiny"><b>Preis:</b> ${esc(d.price)} &nbsp;·&nbsp; <b>Wo:</b> ${esc(d.where)}</p>
@@ -136,7 +142,7 @@ function watermark(svg) {
 }
 
 module.exports = {
-  watermark,
+  watermark, iconTiles,
   esc, page, stars, ratingBlock, infobox, sectionTitle, card, dishCard,
   restaurantCard, medalRow, table, qrBlock, timeline, spotGrid, budgetRow,
   pullQuote, toc,

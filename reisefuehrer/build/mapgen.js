@@ -30,7 +30,28 @@ function routePath(points) {
   return `<polyline points="${pts}" fill="none" stroke="#E8623D" stroke-width="2.4" stroke-dasharray="1,6" stroke-linecap="round"/>`;
 }
 
-function orientationMap({ water, land = [], route = [], points = [], compass = true }) {
+function streetLine(s) {
+  // s: {path:[{x,y}...], main?:bool, name?:string}
+  const pts = s.path.map(p => `${p.x * 6},${p.y * 4.2}`).join(' ');
+  const w = s.main ? 3.4 : 1.7;
+  const casing = s.main ? '#D9CFAE' : '#E4DDC6';
+  const fill = s.main ? '#FFFFFF' : '#FBF8EF';
+  const label = (() => {
+    if (!s.name) return '';
+    const mid = s.path[Math.floor((s.path.length - 1) / 2)];
+    const nxt = s.path[Math.min(s.path.length - 1, Math.floor((s.path.length - 1) / 2) + 1)];
+    const x = mid.x * 6, y = mid.y * 4.2;
+    let angle = Math.atan2((nxt.y - mid.y) * 4.2, (nxt.x - mid.x) * 6) * 180 / Math.PI;
+    if (angle > 90) angle -= 180; if (angle < -90) angle += 180;
+    return `<text x="${x}" y="${y - 3}" font-size="${s.main ? 7.4 : 6.4}" font-style="italic" text-anchor="middle"
+      fill="#8A8370" font-family="Liberation Sans, sans-serif" transform="rotate(${angle.toFixed(1)} ${x} ${y})">${s.name}</text>`;
+  })();
+  return `<polyline points="${pts}" fill="none" stroke="${casing}" stroke-width="${w + 1.8}" stroke-linecap="round" stroke-linejoin="round"/>
+    <polyline points="${pts}" fill="none" stroke="${fill}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>
+    ${label}`;
+}
+
+function orientationMap({ water, land = [], route = [], points = [], streets = [], compass = true }) {
   // water: array of {x,y} polygon points (0-100 scale) for sea area
   const waterPts = water.map(p => `${p.x * 6},${p.y * 4.2}`).join(' ');
   const landShapes = land.map(l => `<polygon points="${l.map(p => `${p.x*6},${p.y*4.2}`).join(' ')}" fill="#F1E9D8"/>`).join('');
@@ -38,6 +59,7 @@ function orientationMap({ water, land = [], route = [], points = [], compass = t
     <rect x="0" y="0" width="600" height="420" fill="#F1E9D8"/>
     <polygon points="${waterPts}" fill="#BEE0E2"/>
     ${landShapes}
+    ${streets.map(streetLine).join('')}
     ${routePath(route)}
     ${points.map(pin).join('')}
     ${compass ? `<g transform="translate(552,32)">

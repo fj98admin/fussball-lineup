@@ -19,6 +19,14 @@ module.exports = {
     water: [{ x: 0, y: 55 }, { x: 0, y: 100 }, { x: 44, y: 100 }, { x: 33, y: 72 }, { x: 10, y: 58 }],
     land: [[{ x: 0, y: 0 }, { x: 100, y: 0 }, { x: 100, y: 100 }, { x: 44, y: 100 }, { x: 33, y: 72 }, { x: 10, y: 58 }, { x: 0, y: 55 }]],
     route: [{ x: 9, y: 74 }, { x: 18, y: 69 }, { x: 27, y: 64 }, { x: 36, y: 53 }, { x: 47, y: 31 }],
+    streets: [
+      { main: true, name: 'Riva Nazario Sauro', path: [{ x: 6, y: 78 }, { x: 13, y: 84 }, { x: 20, y: 76 }, { x: 27, y: 69 }] },
+      { main: true, name: 'Corso Italia', path: [{ x: 27, y: 69 }, { x: 31, y: 65 }, { x: 34, y: 60 }, { x: 34, y: 68 }] },
+      { main: true, name: 'Via Genova', path: [{ x: 30, y: 58 }, { x: 36, y: 53 }, { x: 42, y: 47 }, { x: 46, y: 42 }] },
+      { main: false, name: 'Via San Michele', path: [{ x: 42, y: 47 }, { x: 44, y: 40 }, { x: 47, y: 31 }] },
+      { main: false, name: 'Via Cassa di Risparmio', path: [{ x: 20, y: 59 }, { x: 26, y: 62 }, { x: 30, y: 58 }] },
+      { main: false, name: 'Via del Monte', path: [{ x: 34, y: 68 }, { x: 38, y: 58 }, { x: 42, y: 47 } ] },
+    ],
     points: [
       { n: 1, x: 9, y: 74, cat: 'ship', label: 'Schiff' },
       { n: 2, x: 27, y: 69, cat: 'sight', label: 'Piazza Unità' },

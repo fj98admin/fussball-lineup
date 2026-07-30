@@ -20,6 +20,15 @@ module.exports = {
     water: [{ x: 0, y: 0 }, { x: 55, y: 0 }, { x: 45, y: 22 }, { x: 20, y: 30 }, { x: 0, y: 24 }],
     land: [[{ x: 0, y: 24 }, { x: 20, y: 30 }, { x: 45, y: 22 }, { x: 55, y: 0 }, { x: 100, y: 0 }, { x: 100, y: 100 }, { x: 0, y: 100 }]],
     route: [{ x: 8, y: 20 }, { x: 22, y: 34 }, { x: 36, y: 44 }, { x: 48, y: 52 }, { x: 60, y: 58 }, { x: 72, y: 62 }],
+    streets: [
+      { main: true, name: 'Lungomare Nazario Sauro', path: [{ x: 8, y: 20 }, { x: 22, y: 34 }, { x: 36, y: 44 }, { x: 50, y: 42 }, { x: 66, y: 50 } ] },
+      { main: true, name: 'Strada Palazzo di Città', path: [{ x: 42, y: 48 }, { x: 55, y: 40 }, { x: 66, y: 50 }] },
+      { main: true, name: 'Corso Vittorio Emanuele II', path: [{ x: 50, y: 66 }, { x: 64, y: 60 }, { x: 78, y: 62 }] },
+      { main: true, name: 'Corso Cavour', path: [{ x: 78, y: 62 }, { x: 83, y: 70 }, { x: 88, y: 78 }] },
+      { main: false, name: 'Via Venezia', path: [{ x: 30, y: 40 }, { x: 42, y: 48 } ] },
+      { main: false, name: 'Strada Arco Basso', path: [{ x: 42, y: 48 }, { x: 55, y: 40 } ] },
+      { main: false, name: 'Via Sparano', path: [{ x: 78, y: 62 }, { x: 72, y: 74 }] },
+    ],
     points: [
       { n: 1, x: 8, y: 20, cat: 'ship', label: 'Schiff (Molo San Vito)' },
       { n: 2, x: 30, y: 40, cat: 'food', label: 'Nderr a la Lanz (Fischmarkt)' },

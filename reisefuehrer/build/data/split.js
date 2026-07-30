@@ -21,6 +21,14 @@ module.exports = {
     water: [{ x: 0, y: 82 }, { x: 35, y: 76 }, { x: 65, y: 74 }, { x: 100, y: 80 }, { x: 100, y: 100 }, { x: 0, y: 100 }],
     land: [[{ x: 0, y: 0 }, { x: 100, y: 0 }, { x: 100, y: 80 }, { x: 65, y: 74 }, { x: 35, y: 76 }, { x: 0, y: 82 }]],
     route: [{ x: 52, y: 79 }, { x: 50, y: 64 }, { x: 58, y: 54 }, { x: 66, y: 48 }, { x: 74, y: 54 }],
+    streets: [
+      { main: true, name: 'Obala Hrvatskog Narodnog Preporoda (Riva)', path: [{ x: 15, y: 78 }, { x: 35, y: 76 }, { x: 52, y: 79 }, { x: 65, y: 74 }, { x: 85, y: 78 }] },
+      { main: true, name: 'Kresimirova', path: [{ x: 52, y: 79 }, { x: 51, y: 71 }, { x: 50, y: 64 }] },
+      { main: true, name: 'Peristil', path: [{ x: 50, y: 64 }, { x: 54, y: 59 }, { x: 58, y: 54 }, { x: 66, y: 48 }] },
+      { main: false, name: 'Hrvojeva', path: [{ x: 50, y: 64 }, { x: 40, y: 68 }, { x: 32, y: 72 }] },
+      { main: false, name: 'Šperun', path: [{ x: 32, y: 72 }, { x: 20, y: 56 }, { x: 10, y: 40 }] },
+      { main: false, name: 'Ul. Kralja Tomislava', path: [{ x: 65, y: 74 }, { x: 78, y: 70 }, { x: 90, y: 68 }] },
+    ],
     points: [
       { n: 1, x: 52, y: 79, cat: 'ship', label: 'Schiff (Riva-Hafen)' },
       { n: 2, x: 50, y: 64, cat: 'gate', label: 'Goldenes Tor' },

@@ -3,6 +3,7 @@ const path = require('path');
 const C = require('../components');
 const SK = require('../skylines');
 const MAP = require('../mapgen');
+const ICONS = require('../icons');
 
 const ASSETS_ROOT = path.resolve(__dirname, '..', '..', 'assets');
 function qrImg(key) { return `file://${ASSETS_ROOT}/qr/${key}.png`; }
@@ -38,7 +39,7 @@ function heroPage(d) {
 function mapPage(d) {
   return C.page(`
     ${C.sectionTitle(`${d.name} — Orientierungskarte`, '🗺️')}
-    <p class="tiny">Schematische Karte, nicht maßstabsgetreu · Route Schiff → Altstadt in Orange gestrichelt</p>
+    <p class="tiny">Schematische Karte mit echten Straßennamen, nicht maßstabsgetreu · Route Schiff → Altstadt in Orange gestrichelt</p>
     <div class="map-frame" style="height:120mm;">${MAP.orientationMap(d.map)}</div>
     ${MAP.legendHtml(d.map.points)}
     <div class="grid-2 mt-4">
@@ -64,6 +65,7 @@ function highlightsPages(d) {
       ${i === 0 ? `<div class="eyebrow">${C.esc(d.name)}</div><h2 class="page-title mb-0">Highlights & Sehenswürdigkeiten</h2><div class="divider-line"></div>` : `${C.sectionTitle('Highlights (Fortsetzung)', '★')}`}
       <div class="grid-2 mt-2">
         ${slice.map(h => C.card(`
+          ${C.iconTiles(ICONS.pickPlaceIcons(h), ICONS.renderIcon)}
           <div class="card-title">${C.esc(h.name)}</div>
           <p class="small">${h.desc}</p>
           ${h.history ? `<p class="tiny"><b>Geschichte:</b> ${h.history}</p>` : ''}
@@ -85,7 +87,7 @@ function culinaryPages(d) {
     pages.push(C.page(`
       ${C.watermark(SK[d.key] ? SK[d.key]('#0B2E4F') : '')}
       ${i === 0 ? `<div class="eyebrow">${C.esc(d.name)}</div><h2 class="page-title mb-0">Kulinarik — Was man essen MUSS</h2><div class="divider-line"></div>` : C.sectionTitle('Was man essen muss (Fortsetzung)', '🍽️')}
-      <div class="grid-2 mt-2">${slice.map(C.dishCard).join('')}</div>
+      <div class="grid-2 mt-2">${slice.map(dd => C.dishCard(dd, ICONS)).join('')}</div>
     `, { footerRight: d.name }));
   }
   if (d.culinaryNote) {
