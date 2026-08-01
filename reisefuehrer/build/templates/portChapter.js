@@ -36,22 +36,23 @@ function heroPage(d) {
   return C.page(inner, { footerRight: d.name, noPad: true });
 }
 
-function mapPage(d) {
-  return C.page(`
-    ${C.sectionTitle(`${d.name} — Orientierungskarte`, '🗺️')}
-    <p class="tiny">Schematische Karte mit echten Straßennamen, nicht maßstabsgetreu · Route Schiff → Altstadt in Orange gestrichelt</p>
-    <div class="map-frame" style="height:120mm;">${MAP.orientationMap(d.map)}</div>
-    ${MAP.legendHtml(d.map.points)}
-    <div class="grid-2 mt-4">
-      <div>${C.sectionTitle('Wichtige QR-Codes', '📱')}
-        <div style="display:flex; flex-direction:column; gap:3mm;">
-          ${C.qrBlock('Google Maps: Liegeplatz → Zentrum', d.qr.routeLabel, qrImg(`${d.key}_route`))}
-          ${C.qrBlock('Offizielle Stadtkarte / Tourismusbüro', d.qr.tourismLabel, qrImg(`${d.key}_tourism`))}
-        </div>
+function mapPages(d) {
+  return [
+    C.page(`
+      ${C.sectionTitle(`${d.name} — Orientierungskarte`, '🗺️')}
+      <p class="tiny">Schematische Karte mit echten Straßennamen, nicht maßstabsgetreu · Route Schiff → Altstadt in Orange gestrichelt · alle Highlights, Restaurants und Praktisches aus diesem Kapitel eingezeichnet</p>
+      <div class="map-frame" style="height:158mm;">${MAP.orientationMap(d.map)}</div>
+      ${MAP.legendHtml(d.map.points)}
+    `, { footerRight: d.name }),
+    C.page(`
+      ${C.sectionTitle('Wichtige QR-Codes', '📱')}
+      <div class="grid-2">
+        ${C.qrBlock('Google Maps: Liegeplatz → Zentrum', d.qr.routeLabel, qrImg(`${d.key}_route`))}
+        ${C.qrBlock('Offizielle Stadtkarte / Tourismusbüro', d.qr.tourismLabel, qrImg(`${d.key}_tourism`))}
       </div>
-      <div>${d.orientationNote}</div>
-    </div>
-  `, { footerRight: d.name });
+      <div class="mt-6">${d.orientationNote}</div>
+    `, { footerRight: d.name }),
+  ];
 }
 
 function highlightsPages(d) {
@@ -160,7 +161,7 @@ function budgetPracticalPage(d) {
 function buildPortPages(d) {
   return [
     heroPage(d),
-    mapPage(d),
+    ...mapPages(d),
     ...highlightsPages(d),
     ...culinaryPages(d),
     restaurantsPage(d),

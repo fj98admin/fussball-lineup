@@ -38,6 +38,12 @@ module.exports = {
       { n: 6, x: 50, y: 66, cat: 'sight', label: 'Castello Svevo' },
       { n: 7, x: 78, y: 62, cat: 'sight', label: 'Piazza Mercantile' },
       { n: 8, x: 88, y: 78, cat: 'sight', label: 'Teatro Petruzzelli' },
+      { n: 9, x: 46, y: 55, cat: 'food', label: 'Antò', minor: true },
+      { n: 10, x: 38, y: 51, cat: 'food', label: 'Le Arpie', minor: true },
+      { n: 11, x: 59, y: 57, cat: 'food', label: 'Orecchietteria San Nicola', minor: true },
+      { n: 12, x: 84, y: 70, cat: 'food', label: 'Sparano Palace Cafe & Rooftop', minor: true },
+      { n: 13, x: 76, y: 70, cat: 'food', label: 'Dilman Lounge / POP Bottega', minor: true },
+      { n: 14, x: 14, y: 24, cat: 'practical', label: 'Banco Popolare di Bari (ATM)', minor: true },
     ],
   },
   qr: {

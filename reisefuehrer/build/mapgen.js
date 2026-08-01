@@ -17,11 +17,15 @@ const CATS = {
 function pin(p) {
   const cat = CATS[p.cat] || CATS.sight;
   const x = p.x * 6, y = p.y * 4.2; // scale 0-100 -> 0-600 x 0-420
+  const r = p.minor ? 6.4 : 9;
+  const anchor = p.anchor || 'middle';
+  const lx = anchor === 'start' ? x + 12 : anchor === 'end' ? x - 12 : x;
+  const label = p.minor ? '' : `<text x="${lx}" y="${y - 12}" text-anchor="${anchor}" font-size="9" fill="#0B2E4F" font-family="Liberation Serif, serif" font-weight="bold" paint-order="stroke" stroke="#FAF6EF" stroke-width="3">${p.label}</text>`;
   return `
     <g>
-      <circle cx="${x}" cy="${y}" r="9" fill="${cat.color}" stroke="white" stroke-width="1.6"/>
-      <text x="${x}" y="${y + 3.6}" font-size="9" text-anchor="middle" fill="white" font-family="Liberation Sans, sans-serif" font-weight="bold">${p.n}</text>
-      <text x="${x}" y="${y - 12}" font-size="9.5" text-anchor="middle" fill="#0B2E4F" font-family="Liberation Serif, serif" font-weight="bold">${p.label}</text>
+      <circle cx="${x}" cy="${y}" r="${r}" fill="${cat.color}" stroke="white" stroke-width="1.4"/>
+      <text x="${x}" y="${y + (p.minor ? 3 : 3.6)}" font-size="${p.minor ? 7.2 : 9}" text-anchor="middle" fill="white" font-family="Liberation Sans, sans-serif" font-weight="bold">${p.n}</text>
+      ${label}
     </g>`;
 }
 
