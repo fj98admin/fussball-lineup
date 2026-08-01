@@ -19,15 +19,15 @@ function stars(n, max = 5) {
   return s;
 }
 
-function ratingBlock(ratings) {
+function ratingBlock(ratings, { dense = false } = {}) {
   // ratings: [{label, value}]
-  return `<div class="rating-block">${ratings.map(r => `
+  return `<div class="rating-block${dense ? ' dense' : ''}">${ratings.map(r => `
     <div class="rating-item"><span class="k">${esc(r.label)}</span>${stars(r.value)}</div>
   `).join('')}</div>`;
 }
 
-function infobox(title, html, variant = '', icon = '💡') {
-  return `<div class="infobox ${variant}">
+function infobox(title, html, variant = '', icon = '💡', { dense = false } = {}) {
+  return `<div class="infobox ${variant}${dense ? ' dense' : ''}">
     <div class="infobox-title"><span class="icon">${icon}</span>${esc(title)}</div>
     ${html}
   </div>`;
@@ -103,20 +103,20 @@ function qrBlock(label, sub, qrSrc) {
   </div>`;
 }
 
-function timeline(items) {
+function timeline(items, { dense = false } = {}) {
   // items: [{time, text}]
-  return `<div class="timeline">${items.map(i => `
+  return `<div class="timeline${dense ? ' dense' : ''}">${items.map(i => `
     <div class="tl-item"><div class="tl-time">${esc(i.time)}</div><div class="tl-text">${i.text}</div></div>
   `).join('')}</div>`;
 }
 
-function spotGrid(spots) {
+function spotGrid(spots, { dense = false } = {}) {
   // spots: [{n, name, time, dir, why}]
-  return `<div class="spot-grid">${spots.map(s => `
-    <div class="spot"><span class="spot-num">${s.n}</span>
+  return `<div class="spot-grid${dense ? ' dense' : ''}">${spots.map(s => `
+    <div class="spot${dense ? ' dense' : ''}"><span class="spot-num">${s.n}</span>
       <div class="card-title">${esc(s.name)}</div>
       <p class="tiny">🕐 ${esc(s.time)} &nbsp;·&nbsp; 🧭 ${esc(s.dir)}</p>
-      <p class="small">${s.why}</p>
+      <p class="${dense ? 'tiny' : 'small'}">${s.why}</p>
     </div>
   `).join('')}</div>`;
 }

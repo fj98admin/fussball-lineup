@@ -8,7 +8,7 @@ const ICONS = require('../icons');
 const ASSETS_ROOT = path.resolve(__dirname, '..', '..', 'assets');
 function qrImg(key) { return `file://${ASSETS_ROOT}/qr/${key}.png`; }
 
-function heroPage(d) {
+function heroMapPage(d) {
   const sky = SK[d.key] ? SK[d.key]('#0E7C86') : '';
   const ratingItems = [
     { label: 'Action', value: d.ratings.action },
@@ -18,64 +18,50 @@ function heroPage(d) {
   ];
   const meta = Object.entries(d.quickFacts).map(([k, v]) => `<div><span class="k">${k}</span>${v}</div>`).join('');
   const inner = `
-    <div style="height:172mm; background:linear-gradient(180deg, var(--navy) 0%, var(--navy) 82%, var(--sand) 100%); color:var(--white); position:relative; overflow:hidden;">
-      <div style="padding:18mm 16mm 0 16mm;">
-        <div class="eyebrow on-dark">Hafentag · ${C.esc(d.country)}</div>
-        <h1 class="port-hero-name">${C.esc(d.name)}</h1>
-        <div class="port-hero-tag">${C.esc(d.tagline)}</div>
-        <div class="port-hero-meta">${meta}</div>
-        ${C.ratingBlock(ratingItems)}
+    <div style="height:58mm; background:linear-gradient(180deg, var(--navy) 0%, var(--navy) 85%, var(--sand) 100%); color:var(--white); position:relative; overflow:hidden;">
+      <div style="position:absolute; bottom:0; left:0; right:0; height:24mm; opacity:0.4;">${sky}</div>
+      <div style="padding:7mm 16mm 0 16mm; position:relative;">
+        <div class="eyebrow on-dark" style="margin-bottom:1mm;">Hafentag · ${C.esc(d.country)}</div>
+        <h1 class="port-hero-name" style="font-size:20pt;">${C.esc(d.name)}</h1>
+        <div class="port-hero-tag" style="margin-top:1mm; font-size:9pt;">${C.esc(d.tagline)}</div>
+        <div class="port-hero-meta" style="margin-top:2.5mm; gap:6mm;">${meta}</div>
+        ${C.ratingBlock(ratingItems, { dense: true })}
       </div>
-      <div style="position:absolute; bottom:0; left:0; right:0; height:52mm; opacity:0.9;">${sky}</div>
     </div>
-    <div style="padding:6mm 16mm 0 16mm;">
-      ${C.sectionTitle('Ankunft & Orientierung', '🧭')}
-      ${d.arrivalInfobox}
+    <div style="padding:4mm 16mm 0 16mm;">
+      ${C.sectionTitle(`${d.name} — Orientierungskarte`, '🗺️')}
+      <div class="map-frame" style="height:92mm;">${MAP.orientationMap(d.map)}</div>
+      ${MAP.legendHtml(d.map.points)}
+      <div class="section-title mt-2" style="font-size:10.5pt; margin-bottom:1.5mm; padding-bottom:1mm;"><span class="icon">🧭</span>Ankunft & Orientierung</div>
+      <div class="grid-2" style="gap:4mm;">
+        <div class="qr-row">${C.qrBlock('Google Maps: Liegeplatz → Zentrum', d.qr.routeLabel, qrImg(`${d.key}_route`))}</div>
+        <div class="qr-row">${C.qrBlock('Offizielle Stadtkarte / Tourismusbüro', d.qr.tourismLabel, qrImg(`${d.key}_tourism`))}</div>
+      </div>
+      <div class="tiny-scope two-col-text mt-2" style="column-gap:6mm;">
+        ${d.arrivalInfobox}
+        ${d.orientationNote}
+      </div>
     </div>
   `;
   return C.page(inner, { footerRight: d.name, noPad: true });
 }
 
-function mapPage(d) {
-  return C.page(`
-    ${C.sectionTitle(`${d.name} — Orientierungskarte`, '🗺️')}
-    <p class="tiny">Schematische Karte mit echten Straßennamen, nicht maßstabsgetreu · Route Schiff → Altstadt gestrichelt · alle Highlights, Restaurants und Praktisches eingezeichnet</p>
-    <div class="map-frame" style="height:132mm;">${MAP.orientationMap(d.map)}</div>
-    ${MAP.legendHtml(d.map.points)}
-    <div class="grid-2 mt-4">
-      <div class="qr-row">
-        ${C.qrBlock('Google Maps: Liegeplatz → Zentrum', d.qr.routeLabel, qrImg(`${d.key}_route`))}
-      </div>
-      <div class="qr-row">
-        ${C.qrBlock('Offizielle Stadtkarte / Tourismusbüro', d.qr.tourismLabel, qrImg(`${d.key}_tourism`))}
-      </div>
-    </div>
-    <div class="mt-2">${d.orientationNote}</div>
-  `, { footerRight: d.name });
-}
-
-function highlightsPages(d) {
-  const chunks = [];
+function highlightsPage(d) {
   const items = d.highlights;
-  const perPage = 4;
-  for (let i = 0; i < items.length; i += perPage) {
-    const slice = items.slice(i, i + perPage);
-    chunks.push(C.page(`
-      ${C.watermark(SK[d.key] ? SK[d.key]('#0B2E4F') : '')}
-      ${i === 0 ? `<div class="eyebrow">${C.esc(d.name)}</div><h2 class="page-title mb-0">Highlights & Sehenswürdigkeiten</h2><div class="divider-line"></div>` : `${C.sectionTitle('Highlights (Fortsetzung)', '★')}`}
-      <div class="grid-2 mt-2">
-        ${slice.map(h => C.card(`
-          ${C.iconTiles(ICONS.pickPlaceIcons(h), ICONS.renderIcon)}
-          <div class="card-title">${C.esc(h.name)}</div>
-          <p class="small">${h.desc}</p>
-          ${h.history ? `<p class="tiny"><b>Geschichte:</b> ${h.history}</p>` : ''}
-          <p class="tiny">🕐 <b>Beste Zeit:</b> ${C.esc(h.time)} &nbsp;·&nbsp; 📸 ${h.photoTip}</p>
-          <p class="tiny">🔗 ${C.esc(h.maps)}</p>
-        `)).join('')}
-      </div>
-    `, { footerRight: d.name }));
-  }
-  return chunks;
+  return C.page(`
+    ${C.watermark(SK[d.key] ? SK[d.key]('#0B2E4F') : '')}
+    <div class="eyebrow">${C.esc(d.name)}</div><h2 class="page-title mb-0">Highlights & Sehenswürdigkeiten</h2><div class="divider-line"></div>
+    <div class="grid-3 mt-2 highlights-grid">
+      ${items.map(h => C.card(`
+        ${C.iconTiles(ICONS.pickPlaceIcons(h), ICONS.renderIcon, 'sm')}
+        <div class="card-title">${C.esc(h.name)}</div>
+        <p class="tiny">${h.desc}</p>
+        ${h.history ? `<p class="tiny"><b>Geschichte:</b> ${h.history}</p>` : ''}
+        <p class="tiny">🕐 <b>Beste Zeit:</b> ${C.esc(h.time)} &nbsp;·&nbsp; 📸 ${h.photoTip}</p>
+        <p class="tiny">🔗 ${C.esc(h.maps)}</p>
+      `, { dense: true })).join('')}
+    </div>
+  `, { footerRight: d.name });
 }
 
 function culinaryPages(d) {
@@ -107,24 +93,19 @@ function restaurantsActivitiesPage(d) {
   `, { footerRight: d.name });
 }
 
-function photoSpotsPage(d) {
-  return C.page(`
-    ${C.sectionTitle('Top 10 Fotospots', '📸')}
-    ${C.spotGrid(d.photoSpots)}
-  `, { footerRight: d.name });
-}
-
-function itineraryPage(d) {
+function itineraryPhotoSpotsPage(d) {
   return C.page(`
     ${C.sectionTitle('Zeitplan — ein perfekter Hafentag', '🕐')}
     <div class="grid-2">
-      <div>${C.timeline(d.itinerary)}</div>
+      <div>${C.timeline(d.itinerary, { dense: true })}</div>
       <div>
-        ${C.infobox('Plan A — Perfektes Wetter', d.planA, 'teal', '☀️')}
-        ${C.infobox('Plan B — Wind & Regen', d.planB, 'gold', '🌧️')}
-        ${C.infobox('Plan C — Ohne Ausflug', d.planC, 'navy', '🚶')}
+        ${C.infobox('Plan A — Perfektes Wetter', d.planA, 'teal', '☀️', { dense: true })}
+        ${C.infobox('Plan B — Wind & Regen', d.planB, 'gold', '🌧️', { dense: true })}
+        ${C.infobox('Plan C — Ohne Ausflug', d.planC, 'navy', '🚶', { dense: true })}
       </div>
     </div>
+    <div class="mt-4">${C.sectionTitle('Top 10 Fotospots', '📸')}</div>
+    ${C.spotGrid(d.photoSpots, { dense: true })}
   `, { footerRight: d.name });
 }
 
@@ -149,13 +130,11 @@ function budgetPracticalPage(d) {
 
 function buildPortPages(d) {
   return [
-    heroPage(d),
-    mapPage(d),
-    ...highlightsPages(d),
+    heroMapPage(d),
+    highlightsPage(d),
     ...culinaryPages(d),
     restaurantsActivitiesPage(d),
-    photoSpotsPage(d),
-    itineraryPage(d),
+    itineraryPhotoSpotsPage(d),
     budgetPracticalPage(d),
   ];
 }

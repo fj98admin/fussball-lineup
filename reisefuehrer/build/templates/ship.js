@@ -67,39 +67,34 @@ function wellnessShowsPage() {
   `, { footerRight: 'Mein Schiff 4' });
 }
 
-function fotoplaetzePage() {
+function fotoplaetzeSoloPage() {
   return C.page(`
     ${C.sectionTitle('Ruhezonen & die besten Fotoplätze an Bord', '📸')}
     <div class="grid-2">
-      ${C.infobox('Ruhezonen', '<p>Café Lounge (Heck, ab 7 Uhr) · Sonnendeck/Ausguck Deck 15 (Bug) · Sauna/Spa-Landschaft · Innenpool Deck 12 an vollen Seetagen.</p>', 'teal', '🧘')}
-      ${C.infobox('Pooldeck im Golden Hour Licht', '<p>Früh morgens vor dem Ansturm oder zum Sonnenuntergang — klassisches Liegestuhl-und-Architektur-Motiv.</p>', 'gold', '🌅')}
+      ${C.infobox('Ruhezonen', '<p>Café Lounge (Heck, ab 7 Uhr) · Sonnendeck/Ausguck Deck 15 (Bug) · Sauna/Spa-Landschaft · Innenpool Deck 12 an vollen Seetagen.</p>', 'teal', '🧘', { dense: true })}
+      ${C.infobox('Pooldeck im Golden Hour Licht', '<p>Früh morgens vor dem Ansturm oder zum Sonnenuntergang — klassisches Liegestuhl-und-Architektur-Motiv.</p>', 'gold', '🌅', { dense: true })}
     </div>
-    <div class="mt-4">${C.infobox('Einlaufen Kotor — DER Bordfoto-Moment der Reise', `
-      <p>Die Durchfahrt der engen <b>Verige-Meerenge</b> in die Bucht von Kotor ist das fotografische Highlight der gesamten Kreuzfahrt. <b>Mindestens 30 Minuten vor der geplanten Ankunft</b> an einem bugseitigen Außendeck (Deck 14/15) postieren.</p>
-      <p><b>Motive:</b> der Glockenturm der St.-Nikolaus-Kirche in Perast, die beiden Inselchen Sveti Đorđe und Our Lady of the Rocks, die scheinbar auf dem Wasser schwimmen, und Kotors uralte Stadtmauer, die sich den Berg hinaufzieht. Frühmorgens sind die Lichtbedingungen meist am besten.</p>
-    `, 'coral', '⚓')}</div>
-    <div class="grid-2 mt-4">
-      ${C.infobox('Dubrovnik — kein Bordfoto-Moment', '<p>Die meisten großen Schiffe (auch Mein Schiff 4) legen in Gruž an, ca. 3 km von der Altstadt entfernt — das dramatische „Vorbeifahren an der Stadtmauer" gibt es hier nicht vom Deck aus. Das beste Foto entsteht an Land (Stadtmauer, Mt Srđ).</p>', 'navy', '🏰')}
-      ${C.infobox('Auslaufen', '<p>Heck-Decks bieten meist die schönere Blickrichtung auf die zurückweichende Küste — welche Schiffsseite optimal ist, hängt vom jeweils zugewiesenen Liegeplatz ab. Im Bordprogramm oder bei der Rezeption erfragen.</p>', 'gold', '🌊')}
+    <div class="mt-2">${C.infobox('Einlaufen Kotor — DER Bordfoto-Moment der Reise', `
+      <p>Die Durchfahrt der engen <b>Verige-Meerenge</b> in die Bucht von Kotor ist das fotografische Highlight der gesamten Kreuzfahrt. <b>Mindestens 30 Minuten vor der geplanten Ankunft</b> an einem bugseitigen Außendeck (Deck 14/15) postieren. <b>Motive:</b> der Glockenturm der St.-Nikolaus-Kirche in Perast, die beiden Inselchen Sveti Đorđe und Our Lady of the Rocks, die scheinbar auf dem Wasser schwimmen, und Kotors uralte Stadtmauer, die sich den Berg hinaufzieht. Frühmorgens sind die Lichtbedingungen meist am besten.</p>
+    `, 'coral', '⚓', { dense: true })}</div>
+    <div class="grid-2 mt-2">
+      ${C.infobox('Dubrovnik — kein Bordfoto-Moment', '<p>Die meisten großen Schiffe (auch Mein Schiff 4) legen in Gruž an, ca. 3 km von der Altstadt entfernt — das dramatische „Vorbeifahren an der Stadtmauer" gibt es hier nicht vom Deck aus. Das beste Foto entsteht an Land (Stadtmauer, Mt Srđ).</p>', 'navy', '🏰', { dense: true })}
+      ${C.infobox('Auslaufen', '<p>Heck-Decks bieten meist die schönere Blickrichtung auf die zurückweichende Küste — welche Schiffsseite optimal ist, hängt vom jeweils zugewiesenen Liegeplatz ab. Im Bordprogramm oder bei der Rezeption erfragen.</p>', 'gold', '🌊', { dense: true })}
     </div>
-  `, { footerRight: 'Mein Schiff 4' });
-}
 
-function shipSoloPage() {
-  return C.page(`
-    ${C.sectionTitle('Für Alleinreisende an Bord', '🧑‍🤝‍🧑')}
+    <div class="mt-3">${C.sectionTitle('Für Alleinreisende an Bord', '🧑‍🤝‍🧑')}</div>
     <div class="grid-2">
-      ${C.card('<div class="card-title">Alleinreisendentreff</div><p class="small">Organisiertes Treffen für Solo-Gäste, meist am ersten Seetag — die beste Gelegenheit, andere Alleinreisende kennenzulernen und sich für Landgänge oder Abendessen zu verabreden.</p>')}
-      ${C.card('<div class="card-title">Freie Sitzplatzwahl</div><p class="small">Keine feste Tischzuteilung im Atlantik — genuin solo-freundlich. Auf manchen Abfahrten wird zusätzlich ein reservierter Tisch für Alleinreisende angeboten.</p>')}
-      ${C.card('<div class="card-title">Die Bartheke als sozialer Ort</div><p class="small">An der Theke sitzen statt an einem separaten Tisch — Barkeeper gelten als „kommunikativster Ort an Bord" und stellen Solo-Gäste oft einander vor.</p>')}
-      ${C.card('<div class="card-title">Einzelkabinen-Realität</div><p class="small">Mein Schiff 4 hat vermutlich keine echten Solo-Kabinen (Einzelbett-Layout gibt es v.a. auf neueren Schiffen der Flotte) — meist Einzelbelegungszuschlag auf Doppelkabine, für die konkrete Abfahrt direkt bei TUI erfragen.</p>')}
+      ${C.card('<div class="card-title">Alleinreisendentreff</div><p class="tiny">Organisiertes Treffen für Solo-Gäste, meist am ersten Seetag — die beste Gelegenheit, andere Alleinreisende kennenzulernen und sich für Landgänge oder Abendessen zu verabreden.</p>', { dense: true })}
+      ${C.card('<div class="card-title">Freie Sitzplatzwahl</div><p class="tiny">Keine feste Tischzuteilung im Atlantik — genuin solo-freundlich. Auf manchen Abfahrten wird zusätzlich ein reservierter Tisch für Alleinreisende angeboten.</p>', { dense: true })}
+      ${C.card('<div class="card-title">Die Bartheke als sozialer Ort</div><p class="tiny">An der Theke sitzen statt an einem separaten Tisch — Barkeeper gelten als „kommunikativster Ort an Bord" und stellen Solo-Gäste oft einander vor.</p>', { dense: true })}
+      ${C.card('<div class="card-title">Einzelkabinen-Realität</div><p class="tiny">Mein Schiff 4 hat vermutlich keine echten Solo-Kabinen — meist Einzelbelegungszuschlag auf Doppelkabine, für die konkrete Abfahrt direkt bei TUI erfragen.</p>', { dense: true })}
     </div>
-    <div class="mt-6">${C.pullQuote('Der erste Seetag entscheidet oft über die ganze Woche — wer zum Alleinreisendentreff geht, isst am zweiten Abend selten mehr allein.', 'Praxistipp')}</div>
+    <div class="mt-2">${C.pullQuote('Der erste Seetag entscheidet oft über die ganze Woche — wer zum Alleinreisendentreff geht, isst am zweiten Abend selten mehr allein.', 'Praxistipp')}</div>
   `, { footerRight: 'Mein Schiff 4' });
 }
 
 function buildShipPages() {
-  return [shipHeroPage(), barsRestaurantsPage(), wellnessShowsPage(), fotoplaetzePage(), shipSoloPage()];
+  return [shipHeroPage(), barsRestaurantsPage(), wellnessShowsPage(), fotoplaetzeSoloPage()];
 }
 
 module.exports = { buildShipPages };

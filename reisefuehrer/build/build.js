@@ -9,7 +9,7 @@ const { buildPrepPages } = require('./templates/prep');
 const { buildShipPages } = require('./templates/ship');
 const { buildPortPages } = require('./templates/portChapter');
 const { buildTopListenPages } = require('./templates/toplisten');
-const { kajakVergleichPage, notfallPage, alleinreisendeSummaryPage, abschlussPage, impressumPage } = require('./templates/closing');
+const { kajakVergleichPage, notfallPage, abschlussPage } = require('./templates/closing');
 const { renderPagesToPdf } = require('./render');
 
 const PORT_ORDER = ['triest', 'bari', 'dubrovnik', 'kotor', 'split'];
@@ -55,11 +55,9 @@ function main() {
     pages: [
       dividerPage({ num: '04', title: 'Praktisches & Listen', sub: 'Kajak-Vergleich, Alleinreisende, Notfall, Top-Listen und die persönliche Empfehlung.', skyline: 'wave' }),
       kajakVergleichPage(),
-      alleinreisendeSummaryPage(),
       notfallPage(),
       ...buildTopListenPages(ports),
       abschlussPage(),
-      impressumPage(),
     ],
   });
 

@@ -14,6 +14,17 @@ function kajakVergleichPage() {
         <p class="tiny"><b>USP:</b> „Zu einer 500 Jahre alten Insel-Kirche paddeln"</p>`, { tag: 'Geschützte Bucht' })}
     </div>
     <div class="mt-4">${C.infobox('Fazit', '<p>Wer Adrenalin und die berühmteste Stadtmauer-Kulisse der Adria sucht, wählt Dubrovnik. Wer ruhigeres Wasser, dramatischere Berg-Optik und ein günstigeres, entspannteres Erlebnis will, wählt Kotor.</p>', 'teal', '⚖️')}</div>
+    <div class="mt-6">${C.sectionTitle('Für Alleinreisende — die Übersicht', '🧑‍🤝‍🦱')}</div>
+    <p class="small">Wo lernt man auf dieser Route am ehesten Leute kennen? Eine Zusammenfassung über alle Stationen.</p>
+    ${C.table(['Ort', 'Bester Social-Spot', 'Warum'], [
+      ['An Bord', 'Bartheke + Alleinreisendentreff (1. Seetag)', 'Organisiert, niedrigschwellig, Barkeeper stellen vor'],
+      ['Triest', 'Café-Terrassen Piazza Unità / Canal Grande abends', 'Aperitivo-Kultur, junges Publikum am Kanal'],
+      ['Bari', 'Foodtour, Kochkurs, Fahrradtour', 'Kleine Gruppen erzeugen automatisch Gespräche'],
+      ['Dubrovnik', 'Buža Bar (Klippenbar)', 'Junge, lockere Stimmung trotz teurer Altstadt'],
+      ['Kotor', 'Hostelbars in der Altstadt (Pub Crawls)', 'Aktive Abendprogramme, auch für Nicht-Gäste teils offen'],
+      ['Split', 'Bačvice Beach', 'Picigin-Spiel + Beachbars, mischt Locals & Reisende'],
+    ])}
+    <div class="mt-4">${C.pullQuote('Man muss niemanden aktiv ansprechen — man muss nur an den richtigen Ort gehen. Der Rest ergibt sich.', 'Fazit dieses Kapitels')}</div>
   `, { footerRight: 'Die Häfen im Vergleich' });
 }
 
@@ -37,22 +48,6 @@ function notfallPage() {
   `, { footerRight: 'Notfall & Praktisches' });
 }
 
-function alleinreisendeSummaryPage() {
-  return C.page(`
-    ${C.sectionTitle('Für Alleinreisende — die Übersicht', '🧑‍🤝‍🦱')}
-    <p class="lede">Wo lernt man auf dieser Route am ehesten Leute kennen? Eine Zusammenfassung über alle Stationen.</p>
-    ${C.table(['Ort', 'Bester Social-Spot', 'Warum'], [
-      ['An Bord', 'Bartheke + Alleinreisendentreff (1. Seetag)', 'Organisiert, niedrigschwellig, Barkeeper stellen vor'],
-      ['Triest', 'Café-Terrassen Piazza Unità / Canal Grande abends', 'Aperitivo-Kultur, junges Publikum am Kanal'],
-      ['Bari', 'Foodtour, Kochkurs, Fahrradtour', 'Kleine Gruppen erzeugen automatisch Gespräche'],
-      ['Dubrovnik', 'Buža Bar (Klippenbar)', 'Junge, lockere Stimmung trotz teurer Altstadt'],
-      ['Kotor', 'Hostelbars in der Altstadt (Pub Crawls)', 'Aktive Abendprogramme, auch für Nicht-Gäste teils offen'],
-      ['Split', 'Bačvice Beach', 'Picigin-Spiel + Beachbars, mischt Locals & Reisende'],
-    ])}
-    <div class="mt-6">${C.pullQuote('Man muss niemanden aktiv ansprechen — man muss nur an den richtigen Ort gehen. Der Rest ergibt sich.', 'Fazit dieses Kapitels')}</div>
-  `, { footerRight: 'Für Alleinreisende' });
-}
-
 function abschlussPage() {
   return C.page(`
     ${C.sectionTitle('Abschluss — Die persönliche Empfehlung', '✍️')}
@@ -62,18 +57,10 @@ function abschlussPage() {
       ${C.infobox('Lohnt sich wirklich', '<ul class="list-clean small"><li>Foodtour Bari — dichteste kulinarische Erfahrung pro Stunde</li><li>Festung Kotor bei Sonnenaufgang</li><li>Stadtmauer Dubrovnik direkt bei Öffnung</li><li>Blue Lagoon Split (statt Rafting, wegen Zeitrisiko)</li></ul>', 'teal', '✅')}
       ${C.infobox('Eher vorsichtig einplanen', '<ul class="list-clean small"><li>Cetina-Rafting Split — Zeitrisiko bei kurzem Hafentag real, nur mit frühestem Slot buchen</li><li>Dubrovnik am frühen Nachmittag — Hitze + Hauptandrang treffen zusammen</li><li>Feinschmecker-Restaurants ohne Reservierung — an allen Häfen vorab buchen</li></ul>', 'gold', '⚠️')}
     </div>
-    <div class="mt-6">${C.pullQuote('Die Adria in einer Woche ist kein Widerspruch — man muss nur wissen, wann man rennt und wann man Kaffee trinkt.', 'Der Autor')}</div>
+    <div class="mt-4">${C.pullQuote('Die Adria in einer Woche ist kein Widerspruch — man muss nur wissen, wann man rennt und wann man Kaffee trinkt.', 'Der Autor')}</div>
+    <div class="mt-6">${C.sectionTitle('Über diesen Reiseführer', 'ℹ️')}</div>
+    <p class="tiny">Dieser Reiseführer wurde speziell für die Mein-Schiff-4-Adriaroute Anfang August 2026 zusammengestellt (Triest–Bari–Dubrovnik–Kotor–Split–Triest). Inhalte basieren auf aktueller Web-Recherche (Stand Sommer 2026) aus Tourismus-Portalen, Reiseblogs, Bewertungsplattformen und offiziellen Anbieter-Seiten. Alle Karten sind <b>schematische, selbst gezeichnete Orientierungsdiagramme</b>, nicht maßstabsgetreu — für Live-Navigation die verlinkten QR-Codes zu Google Maps nutzen. Preise, Öffnungszeiten und Tour-Verfügbarkeiten bitte kurz vor der Reise gegenprüfen. Mein Schiff® ist eine Marke der TUI Cruises GmbH; dieser Reiseführer ist ein unabhängig erstelltes Fan-/Reisebegleitwerk ohne Verbindung zu TUI Cruises GmbH.</p>
   `, { footerRight: 'Abschluss' });
 }
 
-function impressumPage() {
-  return C.page(`
-    ${C.sectionTitle('Über diesen Reiseführer', 'ℹ️')}
-    <p class="small">Dieser Reiseführer wurde speziell für die Mein-Schiff-4-Adriaroute Anfang August 2026 zusammengestellt (Triest–Bari–Dubrovnik–Kotor–Split–Triest). Inhalte basieren auf aktueller Web-Recherche (Stand Sommer 2026) aus Tourismus-Portalen, Reiseblogs, Bewertungsplattformen und offiziellen Anbieter-Seiten.</p>
-    <div class="mt-4">${C.infobox('Karten & Illustrationen', '<p>Alle Karten in diesem Guide sind <b>schematische Orientierungsdiagramme</b> (eigene Illustrationen, keine Kartenkacheln Dritter) — Position, Route und Gehzeiten sind näherungsweise, nicht maßstabsgetreu. Für die Live-Navigation immer die verlinkten QR-Codes zu Google Maps nutzen. Skyline-Illustrationen sind vereinfachte, eigens gestaltete Silhouetten.</p>', 'navy', '🎨')}</div>
-    <div class="mt-4">${C.infobox('Wichtiger Hinweis', '<p>Preise, Öffnungszeiten, Liegeplätze und Tour-Verfügbarkeiten ändern sich — insbesondere bei unabhängig gebuchten Ausflügen über Drittanbieter. Alle Angaben bitte kurz vor der Reise über die Mein-Schiff-App bzw. die jeweilige Buchungsseite gegenprüfen. Restaurant- und Aktivitätsbewertungen stammen aus öffentlich zugänglichen Aggregatoren und wurden nicht live zum Zeitpunkt deiner Reise abgerufen.</p>', 'coral', '⚠️')}</div>
-    <p class="tiny mt-6">Mein Schiff® ist eine Marke der TUI Cruises GmbH. Dieser Reiseführer ist ein unabhängig erstelltes Fan-/Reisebegleitwerk und steht in keiner Verbindung zu TUI Cruises GmbH.</p>
-  `, { footerRight: 'Impressum' });
-}
-
-module.exports = { kajakVergleichPage, notfallPage, alleinreisendeSummaryPage, abschlussPage, impressumPage };
+module.exports = { kajakVergleichPage, notfallPage, abschlussPage };
