@@ -314,7 +314,7 @@ table.clean tr:nth-child(even) td { background: #F4EFE2; }
 .spot-grid.dense p { margin-bottom: 1mm; }
 
 /* ---------- MAP ---------- */
-.map-frame { border: 0.5pt solid var(--line); border-radius: 2mm; overflow: hidden; background: #EFEAD9; }
+.map-frame { border: 0.5pt solid var(--line); border-radius: 2mm; overflow: hidden; background: #EEEDE9; }
 .map-legend { display: flex; flex-wrap: wrap; gap: 1.6mm 2.6mm; margin-top: 1.6mm; font-size: 7pt; color: var(--ink-soft); line-height: 1.3; }
 .map-legend .li { display: flex; align-items: center; gap: 1.3mm; }
 .map-legend .dot { width: 2.6mm; height: 2.6mm; border-radius: 50%; display: inline-block; }

@@ -117,12 +117,13 @@ function routePath(points) {
 
 function streetLine(s) {
   // s: {path:[{x,y}...], main?:bool, name?:string}
-  // Colors tuned to evoke the real OpenStreetMap "Standard" tile style:
-  // primary roads = orange casing over cream fill, minor roads = white with light-grey casing.
+  // Colors tuned to evoke the real Google Maps "light" style: near-white
+  // land, thin light-grey minor streets, slightly bolder white-on-grey
+  // arterials — no OSM-style orange casing.
   const pts = s.path.map(p => `${p.x * 6},${p.y * 4.2}`).join(' ');
-  const w = s.main ? 3.6 : 1.6;
-  const casing = s.main ? '#E8A23F' : '#C6C0B3';
-  const fill = s.main ? '#FCD9A6' : '#FFFFFF';
+  const w = s.main ? 3.0 : 1.1;
+  const casing = s.main ? '#C4C4BE' : '#D9D9D3';
+  const fill = s.main ? '#FFFFFF' : '#D9D9D3';
   const label = (() => {
     if (!s.name) return '';
     const mid = s.path[Math.floor((s.path.length - 1) / 2)];
@@ -131,11 +132,11 @@ function streetLine(s) {
     let angle = Math.atan2((nxt.y - mid.y) * 4.2, (nxt.x - mid.x) * 6) * 180 / Math.PI;
     if (angle > 90) angle -= 180; if (angle < -90) angle += 180;
     return `<text x="${x}" y="${y - 3}" font-size="${s.main ? 7.4 : 6.4}" text-anchor="middle"
-      fill="#5B4636" font-family="Liberation Sans, sans-serif" font-weight="${s.main ? 700 : 400}" paint-order="stroke" stroke="#FFFFFF" stroke-width="2.4"
+      fill="#5F6368" font-family="Liberation Sans, sans-serif" font-weight="${s.main ? 600 : 400}" letter-spacing="0.3" paint-order="stroke" stroke="#F4F3F0" stroke-width="2.2"
       transform="rotate(${angle.toFixed(1)} ${x} ${y})">${s.name}</text>`;
   })();
-  return `<polyline points="${pts}" fill="none" stroke="${casing}" stroke-width="${w + 1.6}" stroke-linecap="round" stroke-linejoin="round"/>
-    <polyline points="${pts}" fill="none" stroke="${fill}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>
+  return `<polyline points="${pts}" fill="none" stroke="${casing}" stroke-width="${w + (s.main ? 1.3 : 0)}" stroke-linecap="round" stroke-linejoin="round"/>
+    ${s.main ? `<polyline points="${pts}" fill="none" stroke="${fill}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>` : ''}
     ${label}`;
 }
 
@@ -144,16 +145,16 @@ function orientationMap({ water, land = [], route = [], points = [], streets = [
   const clipId = `land-clip-${++clipCounter}`;
   const waterPts = water.map(p => `${p.x * 6},${p.y * 4.2}`).join(' ');
   const landPolyPoints = land.map(l => l.map(p => `${p.x * 6},${p.y * 4.2}`).join(' '));
-  const landShapes = landPolyPoints.map(pts => `<polygon points="${pts}" fill="#F3EEE4"/>`).join('');
+  const landShapes = landPolyPoints.map(pts => `<polygon points="${pts}" fill="#EEEDE9"/>`).join('');
   // Fine unnamed street texture (mesh), clipped strictly to the land polygons so it
   // never spills into the water — this is what makes it read as a real city plan.
   const meshLayer = mesh.length
     ? `<defs><clipPath id="${clipId}">${landPolyPoints.map(pts => `<polygon points="${pts}"/>`).join('')}</clipPath></defs>
-       <g clip-path="url(#${clipId})" opacity="0.9">${mesh.map(streetLine).join('')}</g>`
+       <g clip-path="url(#${clipId})" opacity="0.95">${mesh.map(streetLine).join('')}</g>`
     : '';
-  return `<svg viewBox="0 0 600 420" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;background:#AAD3DF">
-    <rect x="0" y="0" width="600" height="420" fill="#F3EEE4"/>
-    <polygon points="${waterPts}" fill="#AAD3DF"/>
+  return `<svg viewBox="0 0 600 420" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;background:#A6D3EF">
+    <rect x="0" y="0" width="600" height="420" fill="#EEEDE9"/>
+    <polygon points="${waterPts}" fill="#A6D3EF"/>
     ${landShapes}
     ${meshLayer}
     ${streets.map(streetLine).join('')}
