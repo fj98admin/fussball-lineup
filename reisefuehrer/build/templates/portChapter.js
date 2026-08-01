@@ -36,23 +36,22 @@ function heroPage(d) {
   return C.page(inner, { footerRight: d.name, noPad: true });
 }
 
-function mapPages(d) {
-  return [
-    C.page(`
-      ${C.sectionTitle(`${d.name} — Orientierungskarte`, '🗺️')}
-      <p class="tiny">Schematische Karte mit echten Straßennamen, nicht maßstabsgetreu · Route Schiff → Altstadt in Orange gestrichelt · alle Highlights, Restaurants und Praktisches aus diesem Kapitel eingezeichnet</p>
-      <div class="map-frame" style="height:158mm;">${MAP.orientationMap(d.map)}</div>
-      ${MAP.legendHtml(d.map.points)}
-    `, { footerRight: d.name }),
-    C.page(`
-      ${C.sectionTitle('Wichtige QR-Codes', '📱')}
-      <div class="grid-2">
+function mapPage(d) {
+  return C.page(`
+    ${C.sectionTitle(`${d.name} — Orientierungskarte`, '🗺️')}
+    <p class="tiny">Schematische Karte mit echten Straßennamen, nicht maßstabsgetreu · Route Schiff → Altstadt gestrichelt · alle Highlights, Restaurants und Praktisches eingezeichnet</p>
+    <div class="map-frame" style="height:132mm;">${MAP.orientationMap(d.map)}</div>
+    ${MAP.legendHtml(d.map.points)}
+    <div class="grid-2 mt-4">
+      <div class="qr-row">
         ${C.qrBlock('Google Maps: Liegeplatz → Zentrum', d.qr.routeLabel, qrImg(`${d.key}_route`))}
+      </div>
+      <div class="qr-row">
         ${C.qrBlock('Offizielle Stadtkarte / Tourismusbüro', d.qr.tourismLabel, qrImg(`${d.key}_tourism`))}
       </div>
-      <div class="mt-6">${d.orientationNote}</div>
-    `, { footerRight: d.name }),
-  ];
+    </div>
+    <div class="mt-2">${d.orientationNote}</div>
+  `, { footerRight: d.name });
 }
 
 function highlightsPages(d) {
@@ -82,39 +81,29 @@ function highlightsPages(d) {
 function culinaryPages(d) {
   const pages = [];
   const items = d.dishes;
-  const perPage = 4;
+  const perPage = 9;
+  const pageCount = Math.ceil(items.length / perPage);
   for (let i = 0; i < items.length; i += perPage) {
     const slice = items.slice(i, i + perPage);
+    const isLast = i + perPage >= items.length;
     pages.push(C.page(`
-      ${C.watermark(SK[d.key] ? SK[d.key]('#0B2E4F') : '')}
+      ${pageCount === 1 || i > 0 ? '' : C.watermark(SK[d.key] ? SK[d.key]('#0B2E4F') : '')}
       ${i === 0 ? `<div class="eyebrow">${C.esc(d.name)}</div><h2 class="page-title mb-0">Kulinarik — Was man essen MUSS</h2><div class="divider-line"></div>` : C.sectionTitle('Was man essen muss (Fortsetzung)', '🍽️')}
-      <div class="grid-2 mt-2">${slice.map(dd => C.dishCard(dd, ICONS)).join('')}</div>
-    `, { footerRight: d.name }));
-  }
-  if (d.culinaryNote) {
-    pages.push(C.page(`
-      ${C.sectionTitle('Streetfood & Märkte', '🥘')}
-      ${d.culinaryNote}
+      <div class="grid-3 mt-2">${slice.map(dd => C.dishCard(dd, ICONS, { dense: true })).join('')}</div>
+      ${isLast && d.culinaryNote ? `<div class="mt-4">${d.culinaryNote}</div>` : ''}
     `, { footerRight: d.name }));
   }
   return pages;
 }
 
-function restaurantsPage(d) {
+function restaurantsActivitiesPage(d) {
   return C.page(`
     ${C.sectionTitle('Restaurants — Top 5', '🍴')}
-    <div class="grid-2">${d.restaurants.map(C.restaurantCard).join('')}</div>
-    ${d.drinksNote ? `<div class="mt-4">${d.drinksNote}</div>` : ''}
-  `, { footerRight: d.name });
-}
-
-function activitiesPage(d) {
-  return C.page(`
-    ${C.watermark(SK[d.key] ? SK[d.key]('#0B2E4F') : '')}
-    ${C.sectionTitle('Aktivitäten — Top 3', '⚡')}
-    ${C.medalRow(d.activities)}
-    ${d.activityNote ? `<div class="mt-4">${d.activityNote}</div>` : ''}
-    ${d.activityQr ? `<div class="mt-4">${C.qrBlock('GetYourGuide — direkt buchen', d.activityQr.label, qrImg(d.activityQr.key))}</div>` : ''}
+    <div class="grid-3">${d.restaurants.map(r => C.restaurantCard(r, { dense: true })).join('')}</div>
+    ${d.drinksNote ? `<div class="mt-2">${d.drinksNote}</div>` : ''}
+    <div class="mt-4">${C.sectionTitle('Aktivitäten — Top 3', '⚡')}</div>
+    ${C.medalRow(d.activities, { dense: true })}
+    ${d.activityNote ? `<div class="mt-2">${d.activityNote}</div>` : ''}
   `, { footerRight: d.name });
 }
 
@@ -161,11 +150,10 @@ function budgetPracticalPage(d) {
 function buildPortPages(d) {
   return [
     heroPage(d),
-    ...mapPages(d),
+    mapPage(d),
     ...highlightsPages(d),
     ...culinaryPages(d),
-    restaurantsPage(d),
-    activitiesPage(d),
+    restaurantsActivitiesPage(d),
     photoSpotsPage(d),
     itineraryPage(d),
     budgetPracticalPage(d),

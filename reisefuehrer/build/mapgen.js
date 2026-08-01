@@ -73,6 +73,28 @@ function organicMesh({ cx, cy, w, h, density = 16, seed = 1 }) {
   return streets;
 }
 
+function bboxOf(land) {
+  let x0 = 100, y0 = 100, x1 = 0, y1 = 0;
+  land.forEach(poly => poly.forEach(p => {
+    x0 = Math.min(x0, p.x); y0 = Math.min(y0, p.y);
+    x1 = Math.max(x1, p.x); y1 = Math.max(y1, p.y);
+  }));
+  return { x0, y0, x1, y1 };
+}
+
+// Full-coverage grid mesh: covers the ENTIRE land bounding box (oversized,
+// then clipped precisely to the real land polygon by orientationMap), so
+// every part of the visible land shows streets — not just a hand-picked
+// sub-region. angle gives each port a distinct grid orientation.
+function autoGridMesh(land, { step = 7.5, angle = 0 } = {}) {
+  const { x0, y0, x1, y1 } = bboxOf(land);
+  const cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;
+  const w = (x1 - x0) * 1.5 + 20, h = (y1 - y0) * 1.5 + 20;
+  const cols = Math.max(4, Math.round(w / step));
+  const rows = Math.max(4, Math.round(h / step));
+  return gridMesh({ cx, cy, w, h, cols, rows, angle });
+}
+
 function pin(p) {
   const cat = CATS[p.cat] || CATS.sight;
   const x = p.x * 6, y = p.y * 4.2; // scale 0-100 -> 0-600 x 0-420
@@ -172,4 +194,4 @@ function routeMap(stops) {
   </svg>`;
 }
 
-module.exports = { orientationMap, legendHtml, CATS, routeMap, gridMesh, organicMesh };
+module.exports = { orientationMap, legendHtml, CATS, routeMap, gridMesh, organicMesh, autoGridMesh };

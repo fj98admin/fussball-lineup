@@ -1,5 +1,5 @@
 'use strict';
-const { gridMesh, organicMesh } = require('../mapgen');
+const { autoGridMesh } = require('../mapgen');
 module.exports = {
   key: 'split',
   name: 'Split',
@@ -30,14 +30,7 @@ module.exports = {
       { main: false, name: 'Šperun', path: [{ x: 32, y: 72 }, { x: 20, y: 56 }, { x: 10, y: 40 }] },
       { main: false, name: 'Ul. Kralja Tomislava', path: [{ x: 65, y: 74 }, { x: 78, y: 70 }, { x: 90, y: 68 }] },
     ],
-    mesh: [
-      // Diocletian's Palace — the distinctive Roman cardo/decumanus grid
-      ...gridMesh({ cx: 58, cy: 58, w: 26, h: 24, cols: 5, rows: 5, angle: 6 }),
-      // Veli Varoš — older fishermen's quarter west of the palace
-      ...organicMesh({ cx: 22, cy: 62, w: 24, h: 22, density: 12, seed: 51 }),
-      // Newer grid blocks north toward Marmontova
-      ...gridMesh({ cx: 55, cy: 30, w: 60, h: 26, cols: 8, rows: 3, angle: 6 }),
-    ],
+    mesh: autoGridMesh([[{ x: 6, y: 16 }, { x: 96, y: 16 }, { x: 96, y: 72 }, { x: 6, y: 72 }]], { step: 6, angle: 6 }),
     points: [
       { n: 1, x: 52, y: 79, cat: 'ship', label: 'Schiff (Riva-Hafen)' },
       { n: 2, x: 50, y: 64, cat: 'gate', label: 'Goldenes Tor' },

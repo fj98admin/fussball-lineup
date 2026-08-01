@@ -1,5 +1,5 @@
 'use strict';
-const { gridMesh, organicMesh } = require('../mapgen');
+const { autoGridMesh } = require('../mapgen');
 module.exports = {
   key: 'bari',
   name: 'Bari',
@@ -30,12 +30,7 @@ module.exports = {
       { main: false, name: 'Strada Arco Basso', path: [{ x: 42, y: 48 }, { x: 55, y: 40 } ] },
       { main: false, name: 'Via Sparano', path: [{ x: 78, y: 62 }, { x: 72, y: 74 }] },
     ],
-    mesh: [
-      // Bari Vecchia — dense tangled medieval alley knot
-      ...organicMesh({ cx: 48, cy: 50, w: 42, h: 32, density: 22, seed: 21 }),
-      // Murat — strict 19th-c. boulevard grid
-      ...gridMesh({ cx: 76, cy: 72, w: 42, h: 34, cols: 6, rows: 5, angle: 12 }),
-    ],
+    mesh: autoGridMesh([[{ x: 18, y: 30 }, { x: 96, y: 30 }, { x: 96, y: 88 }, { x: 18, y: 88 }]], { step: 6.5, angle: 8 }),
     points: [
       { n: 1, x: 8, y: 20, cat: 'ship', label: 'Schiff (Molo San Vito)' },
       { n: 2, x: 30, y: 40, cat: 'food', label: 'Nderr a la Lanz (Fischmarkt)' },
