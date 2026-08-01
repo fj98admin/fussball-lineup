@@ -1,4 +1,5 @@
 'use strict';
+const { organicMesh } = require('../mapgen');
 module.exports = {
   key: 'kotor',
   name: 'Kotor',
@@ -30,6 +31,10 @@ module.exports = {
       { main: false, name: 'Ul. Zuzorina', path: [{ x: 37, y: 49 }, { x: 50, y: 47 }, { x: 64, y: 46 }] },
       { main: false, name: 'Aufstieg zur Festung (1.350 Stufen)', path: [{ x: 37, y: 49 }, { x: 34, y: 44 }, { x: 38, y: 32 }, { x: 40, y: 20 }] },
       { main: false, name: 'Škurda-Ufer', path: [{ x: 20, y: 55 }, { x: 20, y: 44 }, { x: 20, y: 40 }] },
+    ],
+    mesh: [
+      // Stari Grad — compact tangled old-town grid within the walls
+      ...organicMesh({ cx: 40, cy: 46, w: 40, h: 26, density: 18, seed: 41 }),
     ],
     points: [
       { n: 1, x: 12, y: 58, cat: 'ship', label: 'Schiff (an der Mauer)' },

@@ -1,4 +1,5 @@
 'use strict';
+const { gridMesh, organicMesh } = require('../mapgen');
 module.exports = {
   key: 'triest',
   name: 'Triest',
@@ -26,6 +27,12 @@ module.exports = {
       { main: false, name: 'Via San Michele', path: [{ x: 42, y: 47 }, { x: 44, y: 40 }, { x: 47, y: 31 }] },
       { main: false, name: 'Via Cassa di Risparmio', path: [{ x: 20, y: 59 }, { x: 26, y: 62 }, { x: 30, y: 58 }] },
       { main: false, name: 'Via del Monte', path: [{ x: 34, y: 68 }, { x: 38, y: 58 }, { x: 42, y: 47 } ] },
+    ],
+    mesh: [
+      // Borgo Teresiano — planned 18th-c. grid around the Canal Grande
+      ...gridMesh({ cx: 27, cy: 60, w: 32, h: 26, cols: 7, rows: 5, angle: -32 }),
+      // Città Vecchia — organic medieval lanes climbing toward San Giusto
+      ...organicMesh({ cx: 40, cy: 42, w: 24, h: 22, density: 14, seed: 11 }),
     ],
     points: [
       { n: 1, x: 9, y: 74, cat: 'ship', label: 'Schiff' },

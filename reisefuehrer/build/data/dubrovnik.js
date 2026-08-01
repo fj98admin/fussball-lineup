@@ -1,4 +1,5 @@
 'use strict';
+const { organicMesh } = require('../mapgen');
 module.exports = {
   key: 'dubrovnik',
   name: 'Dubrovnik',
@@ -30,6 +31,10 @@ module.exports = {
       { main: false, name: 'Ul. Svetog Dominika', path: [{ x: 55, y: 70 }, { x: 60, y: 65 }, { x: 62, y: 62 }] },
       { main: false, name: 'Ul. Zamanjina', path: [{ x: 66, y: 74 }, { x: 72, y: 70 }, { x: 78, y: 66 }] },
       { main: false, name: 'Ul. Miha Pracata', path: [{ x: 55, y: 70 }, { x: 52, y: 76 }, { x: 50, y: 82 }] },
+    ],
+    mesh: [
+      // Old Town — famous herringbone grid of narrow lanes off Stradun
+      ...organicMesh({ cx: 70, cy: 78, w: 48, h: 36, density: 24, seed: 31 }),
     ],
     points: [
       { n: 1, x: 8, y: 34, cat: 'ship', label: 'Schiff (Gruž)' },
